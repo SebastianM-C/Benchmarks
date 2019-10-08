@@ -249,10 +249,12 @@ GC pauses:         1
 ```
 This is quite strange, allocations increased. Let's try without disabling inlining.
 For
-```
+```julia
 const tspan = (0.0,10.0)
 const prob = ODEProblem(lorenz,u0,tspan)
 # const prob = ODEProblem(lorenz2,u,tspan)
+```
+we get
 ```
  & "C:\Program Files\Julia-1.3.0-rc3\bin\julia.exe" --track-allocation=user .\test.jl
   8.964144 seconds (7.13 M allocations: 366.101 MiB, 3.86% gc time)
@@ -307,6 +309,7 @@ bytes allocated:   4832
 pool allocs:       50
 ```
 which has the same number of allocations as in the previous case. Thus does not present the problem.
+
 Let's now try again for `lorenz2`.
 ```julia
 const tspan = (0.0,10.0)
